@@ -99,16 +99,15 @@ class MissingValueHandler:
         print(top_df.to_string())
         return top_df
 
-    def plot_missingness(self, method: str = 'heatmap', sample_rows: Optional[int] = 2000) -> None:
+    def plot_missingness(self, method: str = 'heatmap') -> None:
         """Visualize missing-value patterns.
 
         Supported visualization methods:
             - 'bar': horizontal barplot of percent missing (top columns)
-            - 'matrix': matrix visualization using `missingno` (optional)
             - 'heatmap': correlation heatmap of missingness indicators (default)
 
         Args:
-            method: Visualization type. One of {'bar', 'matrix', 'heatmap'}.
+            method: Visualization type. One of {'bar', 'heatmap'}.
             sample_rows: Maximum number of rows to sample when using the 'matrix'
                 visualization to avoid rendering extremely large matrices.
         """
@@ -124,26 +123,17 @@ class MissingValueHandler:
             plt.title('Top missing columns')
             plt.tight_layout()
             plt.show()
-            return
 
-        if method == 'matrix':
-            try: # TODO
-                import missingno as msno  # optional dependency
-                sample_df = self.df.sample(min(len(self.df), sample_rows), random_state=0)
-                msno.matrix(sample_df)
-                plt.show()
-                return
-            except Exception:
-                # If missingno is not available, fall back to heatmap.
-                print('missingno not available, falling back to heatmap')
+        elif method == 'heatmap':
+            miss_corr = self.df.isna().astype(int).corr()
+            plt.figure(figsize=(12, 8))
+            sns.heatmap(miss_corr, cmap='viridis', vmin=-1, vmax=1)
+            plt.title('Correlation of missingness between columns')
+            plt.tight_layout()
+            plt.show()
 
-        # Default: heatmap of missingness correlation
-        miss_corr = self.df.isna().astype(int).corr()
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(miss_corr, cmap='viridis', vmin=-1, vmax=1)
-        plt.title('Correlation of missingness between columns')
-        plt.tight_layout()
-        plt.show()
+        else:
+            raise ValueError(f"Unsupported method '{method}'. Choose 'bar' or 'heatmap'.")
 
     def convert_types(self,
                       schema: Optional[Dict[str, str]] = None,
