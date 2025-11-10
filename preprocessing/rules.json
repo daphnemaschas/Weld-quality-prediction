@@ -1,0 +1,42 @@
+{
+  "MMA": {
+    "name": "Manual Metal Arc (MMA / SMAW / Shielded Metal Arc)",
+    "Current": { "min": 20, "max": 300 },
+    "Voltage": { "min": 20, "max": 40 }
+  },
+  "SA": {
+    "name": "Submerged Arc Welding (single-wire)",
+    "Current": { "min": 100, "max": 1200 },
+    "Voltage": { "min": 20, "max": 50 }
+  },
+  "NGSAW": {
+    "name": "Submerged Arc Welding - Narrow Gap",
+    "Current": { "min": 300, "max": 1200 },
+    "Voltage": { "min": 20, "max": 50 }
+  },
+  "TSA": {
+    "name": "Tandem Submerged Arc Welding (TSA)",
+    "Current": { "min": 600, "max": 2000 },
+    "Voltage": { "min": 20, "max": 50 }
+  },
+  "NGGMA": {
+    "name": "Gas Metal Arc Automatic (GMAW / GMA-NG narrow gap)",
+    "Current": { "min": 250, "max": 900 },
+    "Voltage": { "min": 20, "max": 42 }
+  },
+  "GMAA": {
+    "name": "Gas Metal Arc Automatic (GMAW / GMA-NG narrow gap)",
+    "Current": { "min": 150, "max": 600 },
+    "Voltage": { "min": 16, "max": 36 }
+  },
+  "FCA": {
+    "name": "Flux-Cored Arc Welding (FCAW)",
+    "Current": { "min": 160, "max": 400 },
+    "Voltage": { "min": 22, "max": 35 }
+  },
+  "GTAA": {
+    "name": "Gas Tungsten Arc Automatic (GTAW / TIG automatic)",
+    "Current": { "min": 1, "max": 400 },
+    "Voltage": { "min": 10, "max": 25 }
+  }
+}
